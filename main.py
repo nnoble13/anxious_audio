@@ -1,44 +1,50 @@
 from flask import Flask, render_template, request, redirect
-import speech_recognition as sr #use googlecloud to convert audio to text
+import speech_recognition as sr
+import librosa
+import soundfile as sf
+import tempfile
 from transformers import pipeline
 
-app = (Flask(__name__))
+app = Flask(__name__)
 
-sentiment_pipeline = pipeline("sentiment-analysis", model="finiteautomata/bertweet-base-sentiment-analysis")
+# Initialize HuBERT pipeline for audio classification
+hubert_pipeline = pipeline("audio-classification", model="superb/hubert-large-superb-er")
 
-@app.route('/', methods=['GET', 'POST']) #load page and render as home page, if request is post then do smth with form data
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    transcript=""
+    transcript = ""
     sentiment = ""
     if request.method == 'POST':
         print('Audio received')
 
-        if 'file' not in request.files: #redirects if file does not exist
+        if 'file' not in request.files:
             return redirect(request.url)
 
         file = request.files['file']
-
         if file.filename == '':
-            return redirect #returns user back to homepage if file is blank
+            return redirect(request.url)
 
         if file:
-            recognizer = sr.Recognizer() #initialize instance if file exists
-            audioFile = sr.AudioFile(file) #create object of audio file
-            with audioFile as source:
-                data = recognizer.record(source)
-            transcript = recognizer.recognize_google(data, key=None) #you can use speech to text key if not None
-            print(transcript)
+            recognizer = sr.Recognizer()
+            with tempfile.NamedTemporaryFile(delete=False) as tmp:
+                file.save(tmp.name)
+                with sr.AudioFile(tmp.name) as source:
+                    data = recognizer.record(source)
+                transcript = recognizer.recognize_google(data, key=None)
+                print(transcript)
 
-        results = sentiment_pipeline(transcript)
-        mood = results[0]['label']  # Assuming you want the first result's label
-        if mood == "NEG":
-            sentiment = "Big oof, sounds bad!"
-        else:
-            sentiment = "Relax, it's all good!"
+                # Process audio for HuBERT
+                audio, sr_librosa = librosa.load(tmp.name, sr=None)
+                audio_resampled = librosa.resample(audio, orig_sr=sr_librosa, target_sr=16000)
+                # Save resampled audio to a new temporary file
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_resampled:
+                    sf.write(tmp_resampled, audio_resampled, 16000)
+                    results = hubert_pipeline(model_input=tmp_resampled.name)
 
+            mood = results[0]['label']
+            sentiment = "Negative vibe detected." if mood == "NEG" else "Positive vibe detected."
 
-
-    return render_template('index.html', transcript=transcript, sentiment=sentiment) #render the template with the transcript text from audio file
+    return render_template('index.html', transcript=transcript, sentiment=sentiment)
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True) #refresh with latest updates, threaded wont get overloaded processing multiple fiels at the same time
+    app.run(debug=True, threaded=True)
