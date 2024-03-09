@@ -30,7 +30,12 @@ def index():
             print(transcript)
 
         results = sentiment_pipeline(transcript)
-        sentiment = results[0]['label']  # Assuming you want the first result's label
+        mood = results[0]['label']  # Assuming you want the first result's label
+        if mood == "NEG":
+            sentiment = "Big oof, sounds bad!"
+        else:
+            sentiment = "Relax, it's all good!"
+
 
 
     return render_template('index.html', transcript=transcript, sentiment=sentiment) #render the template with the transcript text from audio file
