@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Anxious Audio in Python</title>
 </head>
 <body>
-
+  <!-- This is the form that will be used to upload the audio file. Post method takes data and sends it back -->
+<div id="speechContainer">
+  <h1>Upload new file</h1>
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <br>
+    <input type="submit" value="submit" value="Transcribe">
+  </form>
+</div>
 </body>
 </html>
