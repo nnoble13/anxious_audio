@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Anxious Audio in Python</title>
+    <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}" />
 </head>
 <body>
   <!-- This is the form that will be used to upload the audio file. Post method takes data and sends it back -->
@@ -12,13 +14,13 @@
   <form method="post" enctype="multipart/form-data">
     <input type="file" name="file">
     <br>
-    <input type="submit" value="submit" value="Transcribe">
+    <input type="submit" id= "transcribeButton" value="Transcribe">
   </form>
 
   {% if transcript != "" %}
   <div id="speechTranscriptContainer">
-    <h1>Transcript</h1>
-    <p>{{transcript}}</p>
+    <h2>Transcript</h2>
+    <p id="speechText">{{transcript}}</p>
   </div>
   {% endif %}
 </div>

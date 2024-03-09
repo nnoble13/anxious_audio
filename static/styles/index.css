@@ -1,0 +1,38 @@
+h1, h2 {
+  font-family: 'Madimi One', sans-serif;
+}
+
+p, input {
+  font-family: Roboto;
+}
+
+#speechContainer {
+  margin: 20px;
+}
+
+#transcribeButton {
+  background-color: #0191FE;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 30px;
+  margin-top: 10px;
+}
+
+#transcribeButton:hover {
+  cursor: pointer;
+}
+
+#speechTranscriptContainer {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#speechText {
+  margin-top: 10px;
+  font-size: 20px;
+  width: 500px;
+}
