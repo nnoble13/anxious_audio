@@ -7,12 +7,20 @@
 <body>
   <!-- This is the form that will be used to upload the audio file. Post method takes data and sends it back -->
 <div id="speechContainer">
-  <h1>Upload new file</h1>
+  <h1>Are they mad at me?</h1>
+  <p>Upload an audio file to transcribe and analyze if your friend is mad at you.<br>Upload any file in .wav format</p>
   <form method="post" enctype="multipart/form-data">
     <input type="file" name="file">
     <br>
     <input type="submit" value="submit" value="Transcribe">
   </form>
+
+  {% if transcript != "" %}
+  <div id="speechTranscriptContainer">
+    <h1>Transcript</h1>
+    <p>{{transcript}}</p>
+  </div>
+  {% endif %}
 </div>
 </body>
 </html>

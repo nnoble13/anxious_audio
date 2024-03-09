@@ -6,6 +6,7 @@ app = (Flask(__name__))
 
 @app.route('/', methods=['GET', 'POST']) #load page and render as home page, if request is post then do smth with form data
 def index():
+    transcript=""
     if request.method == 'POST':
         print('Audio received')
 
@@ -22,10 +23,10 @@ def index():
             audioFile = sr.AudioFile(file) #create object of audio file
             with audioFile as source:
                 data = recognizer.record(source)
-            text = recognizer.recognize_google(data, key=None) #you can use speech to text key if not None
-            print(text)
+            transcript = recognizer.recognize_google(data, key=None) #you can use speech to text key if not None
+            print(transcript)
 
-    return render_template('index.html')
+    return render_template('index.html', transcript=transcript) #render the template with the transcript text from audio file
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True) #refresh with latest updates, threaded wont get overloaded processing multiple fiels at the same time
