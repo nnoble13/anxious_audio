@@ -8,4 +8,3 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True) #refresh with latest updates, threaded wont get overloaded processing multiple fiels at the same time
- 
