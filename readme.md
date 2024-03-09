@@ -4,6 +4,8 @@
 
 This project is a speech recognition system designed to transcribe speech from `.wav` files. Currently, it features a Flask application to run the transcription service locally. The next phase will introduce sentiment analysis on the transcribed text to evaluate emotional tones.
 
+Right now it's using sentiment analysis on text that is transcribed, but further I'd like to use text and raw audio. Using Twitter-roberta-base-sentiment which is a roBERTa model trained on ~58M tweets and fine-tuned for sentiment analysis.
+
 ![This is the current progress](images/Capture.JPG "Work in Progress")
 
 ## Quick Start
