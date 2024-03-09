@@ -8,21 +8,23 @@
 </head>
 <body>
   <!-- This is the form that will be used to upload the audio file. Post method takes data and sends it back -->
-<div id="speechContainer">
-  <h1>Are they mad at me?</h1>
-  <p>Upload an audio file to transcribe and analyze if your friend is mad at you.<br>Upload any file in .wav format</p>
-  <form method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <br>
-    <input type="submit" id= "transcribeButton" value="Transcribe">
-  </form>
+<div class="container">
+  <div id="speechContainer">
+    <h1>Are they mad at me?</h1>
+    <p>Upload an audio file to transcribe and analyze if your friend is mad at you.<br>Upload any file in .wav format</p>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <br>
+      <input type="submit" id= "transcribeButton" value="Transcribe">
+    </form>
 
-  {% if transcript != "" %}
-  <div id="speechTranscriptContainer">
-    <h2>Transcript</h2>
-    <p id="speechText">{{transcript}}</p>
+    {% if transcript != "" %}
+    <div id="speechTranscriptContainer">
+      <h2>Transcript</h2>
+      <p id="speechText">{{transcript}}</p>
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 </div>
 </body>
 </html>

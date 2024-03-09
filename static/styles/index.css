@@ -1,3 +1,23 @@
+
+body, html {
+  height: 100%; /* Ensure the full height is available for flex */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Center text for all child elements */
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Adjust width as needed */
+  max-width: 600px; /* Or your preferred max width */
+}
+
 h1, h2 {
   font-family: 'Madimi One', sans-serif;
 }
@@ -5,6 +25,7 @@ h1, h2 {
 p, input {
   font-family: Roboto;
 }
+
 
 #speechContainer {
   margin: 20px;
@@ -26,9 +47,6 @@ p, input {
 #speechTranscriptContainer {
   margin-top: 20px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
 }
 
 #speechText {
