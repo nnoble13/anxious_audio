@@ -4,8 +4,8 @@
 
 This project is a speech recognition system designed to transcribe speech from `.wav` files. Currently, it features a Flask application to run the transcription service locally. The next phase will introduce sentiment analysis on the transcribed text to evaluate emotional tones.
 
-<!-- ![This is the current progress](images/capture.JPG "Work in Progress") -->
-![](images/capture.JPG)
+![This is the current progress](images/Capture.JPG "Work in Progress")
+
 ## Quick Start
 
 1. **Clone the Repo**
